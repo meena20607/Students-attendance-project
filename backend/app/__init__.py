@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from .config import Config
 from .extensions import db, jwt, mail, celery
+from .models import *
 
 def create_app():
     app = Flask(__name__)
@@ -17,20 +18,16 @@ def create_app():
 
     # Register blueprints
     from .routes.auth import auth_bp
-    from .routes.courses import courses_bp
-    from .routes.sections import sections_bp
-    from .routes.students import students_bp
-    from .routes.attendance import attendance_bp
-    from .routes.leave import leave_bp
-    from .routes.analytics import analytics_bp
+    # from .routes.courses import courses_bp
+  
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
-    app.register_blueprint(courses_bp, url_prefix="/api/courses")
-    app.register_blueprint(sections_bp, url_prefix="/api/sections")
-    app.register_blueprint(students_bp, url_prefix="/api/students")
-    app.register_blueprint(attendance_bp, url_prefix="/api/attendance")
-    app.register_blueprint(leave_bp, url_prefix="/api/leave")
-    app.register_blueprint(analytics_bp, url_prefix="/api/analytics")
+    # app.register_blueprint(courses_bp, url_prefix="/api/courses")
+    # app.register_blueprint(sections_bp, url_prefix="/api/sections")
+    # app.register_blueprint(students_bp, url_prefix="/api/students")
+    # app.register_blueprint(attendance_bp, url_prefix="/api/attendance")
+    # app.register_blueprint(leave_bp, url_prefix="/api/leave")
+    # app.register_blueprint(analytics_bp, url_prefix="/api/analytics")
 
     return app
 
