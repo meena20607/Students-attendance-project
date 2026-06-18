@@ -1,17 +1,59 @@
+import { useState } from "react";
+import "./Login.css";
+
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log({
+      email,
+      password,
+    });
+  };
+
   return (
-    <div>
-      <h1>Student Attendance Management System</h1>
+    <div className="login-container">
+      <div className="left-panel">
+        <h1>🎓 Student Attendance Management</h1>
+        <p>
+          Track attendance, manage students, handle leave requests
+          and monitor academic progress efficiently.
+        </p>
+      </div>
 
-      <h2>Login</h2>
+      <div className="login-card">
+        <h2>Welcome Back</h2>
+        <p>Sign in to continue</p>
 
-      <input type="email" placeholder="Email" />
-      <br /><br />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-      <input type="password" placeholder="Password" />
-      <br /><br />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-      <button>Login</button>
+          <button type="submit">
+            Login
+          </button>
+        </form>
+
+        <div className="links">
+          <a href="/register">Create Account</a>
+        </div>
+      </div>
     </div>
   );
 }
