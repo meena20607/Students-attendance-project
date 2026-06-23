@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from .config import Config
 from .extensions import db, jwt, mail, celery
+from .routes.courses import courses_bp
 from .models import *
 
 def create_app():
@@ -22,7 +23,7 @@ def create_app():
   
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
-    # app.register_blueprint(courses_bp, url_prefix="/api/courses")
+    app.register_blueprint(courses_bp, url_prefix="/api/courses")
     # app.register_blueprint(sections_bp, url_prefix="/api/sections")
     # app.register_blueprint(students_bp, url_prefix="/api/students")
     # app.register_blueprint(attendance_bp, url_prefix="/api/attendance")
