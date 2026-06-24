@@ -1,3 +1,4 @@
+
 from flask import Blueprint, request, jsonify
 from ..extensions import db
 from ..models.course import Course
@@ -38,3 +39,34 @@ def get_courses():
         })
 
     return jsonify(result)
+
+
+
+@courses_bp.route("/<int:id>", methods=["PUT"])
+def update_course(id):
+
+    course = Course.query.get_or_404(id)
+
+    data = request.get_json()
+
+    course.course_name = data["course_name"]
+    course.course_code = data["course_code"]
+    course.description = data["description"]
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Course updated successfully"
+    })
+
+@courses_bp.route("/<int:id>", methods=["DELETE"])
+def delete_course(id):
+
+    course = Course.query.get_or_404(id)
+
+    db.session.delete(course)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Course deleted successfully"
+    })
